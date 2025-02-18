@@ -27,14 +27,14 @@ bibtex_bibfiles:
 # Information about where the book exists on the web
 repository:
   url: https://github.com/prescient-design/lobster-docs  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  # path_to_book: docs  # Optional path to your book, relative to the repository root
+  # branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  favicon: favicon.png
+  favicon: "favicon.png"
   use_issues_button: true
   use_repository_button: true
-  home_page_in_navbar: true  # Whether to include your home page in the left Navigation Bar
-  baseurl: "https://prescient-design.github.io/lobster-docs/"
+  # home_page_in_navbar: true  # Whether to include your home page in the left Navigation Bar
+  # baseurl: "https://prescient-design.github.io/lobster-docs/"
