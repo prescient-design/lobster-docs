@@ -5,6 +5,8 @@ description = "Documentation for Lobster: Language models for Biological Sequenc
 authors = [{name = "Nathan C. Frey", email = "frey.nathan.nf1@gene.com"}]
 dynamic = ["version", "optional-dependencies"]
 requires-python = ">=3.10"
+
+[tool.uv]
 dependencies = [
     "jupyter-book",
     "gh-pages",

@@ -1,0 +1,8 @@
+Metadata-Version: 2.2
+Name: lobster-docs
+Version: 0.0.post1.dev4
+Summary: Documentation for Lobster: Language models for Biological Sequence Transformation and Evolutionary Representation.
+Author-email: "Nathan C. Frey" <frey.nathan.nf1@gene.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
