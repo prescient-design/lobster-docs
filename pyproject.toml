@@ -1,0 +1,21 @@
+[project]
+name = "lobster-docs"
+readme = "README.md"
+description = "Documentation for Lobster: Language models for Biological Sequence Transformation and Evolutionary Representation."
+authors = [{name = "Nathan C. Frey", email = "frey.nathan.nf1@gene.com"}]
+dynamic = ["version", "optional-dependencies"]
+requires-python = ">=3.10"
+dependencies = [
+    "jupyter-book",
+    "gh-pages",
+]
+
+[build-system]
+requires = ["setuptools >= 65", "setuptools_scm[toml]>=6.2"]
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools_scm]
+search_parent_directories = true
+version_scheme = "no-guess-dev"
+fallback_version = "0.0.0"
+local_scheme = "no-local-version" # see https://github.com/pypa/setuptools-scm/issues/455
