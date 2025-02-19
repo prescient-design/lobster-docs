@@ -10,7 +10,7 @@
 Follow the installation instructions in the `lobster` [README](https://github.com/prescient-design/lobster/tree/main?tab=readme-ov-file#install-).
 
 ## Citations
-If you use `lobster` code and/or models, please cite the relevant papers in the `lobster` [README](https://github.com/prescient-design/lobster/tree/main?tab=readme-ov-file#citations-)
+If you use `lobster` code and/or models, please cite the relevant papers in the `lobster` [README](https://github.com/prescient-design/lobster/tree/main?tab=readme-ov-file#citations-).
 
 ## Contributions
 Contributions are welcome!
