@@ -3,8 +3,32 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: contributors
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+  - caption: Getting Started
+    chapters:
+      - file: installation
+  - caption: Models
+    chapters:
+      - file: models/overview
+      - file: models/masked_models
+      - file: models/causal_models
+      - file: models/concept_bottleneck_models
+  - caption: Tokenization
+    chapters:
+      - file: tokenization/overview
+      - file: tokenization/amino_acid_tokenization
+      - file: tokenization/nucleotide_tokenization
+  - caption: Tutorials
+    chapters:
+      - file: tutorials/embedding_extraction
+      - file: tutorials/concept_interventions
+      - file: tutorials/training_from_scratch
+      - file: tutorials/fine_tuning
+  - caption: Advanced Topics
+    chapters:
+      - file: advanced/working_with_structures
+      - file: advanced/multi_modal_models
+      - file: advanced/custom_tokenizers
+  - caption: Contributors
+    chapters:
+      - file: contributors

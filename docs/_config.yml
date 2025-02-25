@@ -30,11 +30,19 @@ repository:
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
+launch_buttons:
+  notebook_interface: classic
+  colab_url: https://colab.research.google.com
+
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_issues_button: true
   use_repository_button: true
   favicon: "favicon.png"
+  extra_navbar: |
+    <div>
+      <a href="https://github.com/prescient-design/lobster">GitHub</a>
+    </div>
   # home_page_in_navbar: true  # Whether to include your home page in the left Navigation Bar
   # baseurl: "https://prescient-design.github.io/lobster-docs/"
