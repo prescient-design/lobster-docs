@@ -1,0 +1,70 @@
+Traceback (most recent call last):
+  File "/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ncfrey/.local/share/uv/python/cpython-3.12.5-macos-aarch64-none/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Initialize the tokenizer transform
+tokenizer = AminoAcidTokenizerFast()
+transform_fn = TokenizerTransform(
+    tokenizer=tokenizer,
+    padding="max_length",
+    max_length=256,
+    truncation=True,
+    return_attention_mask=True
+)
+
+# Initialize the DyAb datamodule
+dyab_datamodule = DyAbDataFrameLightningDataModule(
+    data=df,
+    remove_nulls=True,
+    transform_fn=transform_fn,
+    lengths=[0.8, 0.1, 0.1],  # Train, val, test split
+    batch_size=16,
+    seed=SEED,
+    num_workers=4,
+    max_length=256
+)
+
+# Set up the datamodule
+dyab_datamodule.prepare_data()
+dyab_datamodule.setup(stage="fit")
+
+# Let's examine what a batch from the dataloader looks like
+train_dataloader = dyab_datamodule.train_dataloader()
+for batch in train_dataloader:
+    sequence1, sequence2, target1, target2 = batch
+    print("Sequence1 shape:", sequence1[0].shape)  # First element of the tuple for heavy chain
+    print("Sequence2 shape:", sequence2[0].shape)  # First element of the tuple for heavy chain
+    print("Target1 shape:", target1.shape)
+    print("Target2 shape:", target2.shape)
+    print("Target difference (what model will predict):", (target1 - target2).mean().item())
+    break
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[3], line 31[0m
+[1;32m     29[0m [38;5;28;01mfor[39;00m batch [38;5;129;01min[39;00m train_dataloader:
+[1;32m     30[0m     sequence1, sequence2, target1, target2 [38;5;241m=[39m batch
+[0;32m---> 31[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mSequence1 shape:[39m[38;5;124m"[39m, [43msequence1[49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m[38;5;241;43m.[39;49m[43mshape[49m)  [38;5;66;03m# First element of the tuple for heavy chain[39;00m
+[1;32m     32[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mSequence2 shape:[39m[38;5;124m"[39m, sequence2[[38;5;241m0[39m][38;5;241m.[39mshape)  [38;5;66;03m# First element of the tuple for heavy chain[39;00m
+[1;32m     33[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mTarget1 shape:[39m[38;5;124m"[39m, target1[38;5;241m.[39mshape)
+
+[0;31mAttributeError[0m: 'tuple' object has no attribute 'shape'
+

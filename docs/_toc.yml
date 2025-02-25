@@ -23,6 +23,7 @@ parts:
       - file: tutorials/embedding_extraction
       - file: tutorials/concept_interventions
       - file: tutorials/training_from_scratch
+      - file: tutorials/dyab
       - file: tutorials/fine_tuning
   - caption: Advanced Topics
     chapters:
