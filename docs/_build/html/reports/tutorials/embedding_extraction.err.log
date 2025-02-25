@@ -18,21 +18,45 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import torch
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
+# Turn off gradient calculation for inference
+with torch.no_grad():
+    # Get embeddings for each sequence
+    embeddings = []
+    for seq in sequences:
+        # Tokenize and process the sequence
+        tokens = model.tokenizer(seq, return_tensors="pt").to(device)
+        
+        # Get the embedding (using the [CLS] token representation)
+        outputs = model.model(
+            input_ids=tokens["input_ids"],
+            attention_mask=tokens["attention_mask"]
+        )
+        
+        # Extract the [CLS] token embedding
+        cls_embedding = outputs[:, 0, :].cpu().numpy()
+        embeddings.append(cls_embedding.squeeze())
+    
+    # Convert list to numpy array
+    embeddings = np.array(embeddings)
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mtorch[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
-[1;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[7], line 16[0m
+[1;32m     10[0m     outputs [38;5;241m=[39m model[38;5;241m.[39mmodel(
+[1;32m     11[0m         input_ids[38;5;241m=[39mtokens[[38;5;124m"[39m[38;5;124minput_ids[39m[38;5;124m"[39m],
+[1;32m     12[0m         attention_mask[38;5;241m=[39mtokens[[38;5;124m"[39m[38;5;124mattention_mask[39m[38;5;124m"[39m]
+[1;32m     13[0m     )
+[1;32m     15[0m     [38;5;66;03m# Extract the [CLS] token embedding[39;00m
+[0;32m---> 16[0m     cls_embedding [38;5;241m=[39m [43moutputs[49m[43m[[49m[43m:[49m[43m,[49m[43m [49m[38;5;241;43m0[39;49m[43m,[49m[43m [49m[43m:[49m[43m][49m[38;5;241m.[39mcpu()[38;5;241m.[39mnumpy()
+[1;32m     17[0m     embeddings[38;5;241m.[39mappend(cls_embedding[38;5;241m.[39msqueeze())
+[1;32m     19[0m [38;5;66;03m# Convert list to numpy array[39;00m
 
-[0;31mModuleNotFoundError[0m: No module named 'torch'
+File [0;32m~/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/transformers/utils/generic.py:435[0m, in [0;36mModelOutput.__getitem__[0;34m(self, k)[0m
+[1;32m    433[0m     [38;5;28;01mreturn[39;00m inner_dict[k]
+[1;32m    434[0m [38;5;28;01melse[39;00m:
+[0;32m--> 435[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mto_tuple[49m[43m([49m[43m)[49m[43m[[49m[43mk[49m[43m][49m
+
+[0;31mTypeError[0m: tuple indices must be integers or slices, not tuple
 

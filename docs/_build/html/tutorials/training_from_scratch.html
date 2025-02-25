@@ -61,6 +61,7 @@
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributors" href="../contributors.html" />
     <link rel="prev" title="Concept Interventions with CB-LBSTER" href="concept_interventions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -196,6 +197,10 @@
 <li class="toctree-l1"><a class="reference internal" href="embedding_extraction.html">Embedding Extraction with LBSTER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concept_interventions.html">Concept Interventions with CB-LBSTER</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Training a LBSTER Model from Scratch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
 </ul>
 
     </div>
@@ -467,15 +472,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -521,6 +519,12 @@ document.write(`
 <span class="n">df</span> <span class="o">=</span> <span class="n">generate_synthetic_data</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> protein sequences&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Example sequence: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated 1000 protein sequences
+Example sequence: FIIGEDLWAWITHYTDHPSQTKLVNANCIMGFTVFEMMRNEDKQLNEYGKQHCEFNQWDDEELD
 </pre></div>
 </div>
 </div>
@@ -650,6 +654,20 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key model configuration parameters:
+----------------------------------------
+hidden_dim: Size of the hidden layers
+n_layer: Number of transformer layers
+n_head: Number of attention heads
+dim_feedforward: Size of the feedforward network in transformer layers
+learning_rate: Initial learning rate for optimizer
+weight_decay: L2 regularization
+warmup_steps: Number of warmup steps for learning rate scheduler
+----------------------------------------
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="step-4-training-process">
@@ -662,6 +680,15 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;lobster_train -cn train_config&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">For larger datasets or more complex models, you might want to add more options:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;lobster_train -cn train_config trainer.max_epochs=10 trainer.devices=2 model.learning_rate=5e-5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>To train the model, run this command from the terminal:
+lobster_train -cn train_config
+
+For larger datasets or more complex models, you might want to add more options:
+lobster_train -cn train_config trainer.max_epochs=10 trainer.devices=2 model.learning_rate=5e-5
 </pre></div>
 </div>
 </div>
@@ -705,6 +732,33 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulating training process:
+1. Loading configuration...
+2. Preparing data module...
+3. Initializing model...
+4. Setting up trainer with callbacks...
+Epoch 1/5:
+  Train loss: 2.6029
+  Val loss: 2.4009
+Epoch 2/5:
+  Train loss: 2.1468
+  Val loss: 1.9218
+Epoch 3/5:
+  Train loss: 1.7397
+  Val loss: 1.7689
+Epoch 4/5:
+  Train loss: 1.2970
+  Val loss: 1.1965
+Epoch 5/5:
+  Train loss: 0.9067
+  Val loss: 0.9616
+
+5. Saving best checkpoint...
+6. Training complete!
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -721,6 +775,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/b8b9620e5ff21da1f434dc2962327af6e2b5b07fac4ed3ceef3b31e2e774c65f.png" src="../_images/b8b9620e5ff21da1f434dc2962327af6e2b5b07fac4ed3ceef3b31e2e774c65f.png" />
+</div>
 </div>
 </section>
 <section id="step-6-model-evaluation">
@@ -736,6 +793,15 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model evaluation metrics:
+----------------------------------------
+Perplexity: Exponentiated average negative log-likelihood per token
+Loss: Negative log-likelihood loss on held-out data
+----------------------------------------
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -743,6 +809,11 @@ document.write(`
 <span class="n">final_val_loss</span> <span class="o">=</span> <span class="n">val_losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">perplexity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">final_val_loss</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final validation perplexity: </span><span class="si">{</span><span class="n">perplexity</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final validation perplexity: 2.6159
 </pre></div>
 </div>
 </div>
@@ -770,6 +841,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Code to load your trained model:
+
+from lobster.model import LobsterPMLM
+
+# Load model from checkpoint
+model = LobsterPMLM.load_from_checkpoint(&quot;path/to/best/checkpoint.ckpt&quot;)
+model.eval()  # Set to evaluation mode
+
+# Use for inference
+sequence = &quot;MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGH&quot;
+tokens = model.tokenizer(sequence, return_tensors=&quot;pt&quot;)
+embeddings = model.model(input_ids=tokens[&quot;input_ids&quot;], 
+                          attention_mask=tokens[&quot;attention_mask&quot;])
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="advanced-training-strategies-for-production-models">
@@ -791,6 +879,24 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Checkpoint Resuming: To continue training from a checkpoint&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   trainer.resume_from_checkpoint=&#39;path/to/last/checkpoint.ckpt&#39;&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Advanced training strategies:
+------------------------------------------------------------
+1. Gradient Accumulation: For training with effectively larger batch sizes
+   trainer.accumulate_grad_batches=4
+
+2. Mixed Precision Training: For faster training and lower memory usage
+   trainer.precision=16
+
+3. Distributed Training: For multi-GPU setups
+   trainer.strategy=&#39;ddp&#39; trainer.devices=4
+
+4. Checkpoint Resuming: To continue training from a checkpoint
+   trainer.resume_from_checkpoint=&#39;path/to/last/checkpoint.ckpt&#39;
+------------------------------------------------------------
 </pre></div>
 </div>
 </div>
@@ -857,6 +963,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Concept Interventions with CB-LBSTER</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../contributors.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contributors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

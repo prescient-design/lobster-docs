@@ -1,0 +1,76 @@
+
+# @package _global_
+
+# paths config
+paths:
+  root_dir: "./"
+
+# setup config 
+setup:
+  _target_: hydra.utils.instantiate_at_run
+  
+# data config
+data:
+  _target_: lobster.data.DataFrameLightningDataModule
+  data: 
+    _target_: pandas.read_csv
+    filepath_or_buffer: synthetic_proteins.csv
+  columns: ["sequence"]
+  batch_size: 8
+  max_length: 256
+  num_workers: 2
+  transform_fn:
+    _target_: lobster.tokenization.PmlmTokenizerTransform
+    padding: "max_length"
+    truncation: true
+    max_length: 256
+    tokenizer_dir: "pmlm_tokenizer"
+
+# model config
+model:
+  _target_: lobster.model.LobsterPMLM
+  max_length: 256
+  hidden_dim: 128
+  n_layer: 2
+  n_head: 4
+  dim_feedforward: 512
+  learning_rate: 1e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+
+# trainer config
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: 5
+  accelerator: auto
+  devices: 1
+  log_every_n_steps: 10
+  val_check_interval: 0.5
+  
+# logger config
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "./logs"
+  name: "lobster-training"
+  
+# callbacks config
+callbacks:
+  checkpoint_callback:
+    _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    monitor: "val_loss"
+    mode: "min"
+    save_top_k: 1
+    save_last: true
+    dirpath: "./checkpoints"
+    filename: "{epoch}-{val_loss:.2f}"
+  early_stopping:
+    _target_: lightning.pytorch.callbacks.EarlyStopping
+    monitor: "val_loss"
+    patience: 3
+    mode: "min"
+    
+# don't actually run training in this example
+dryrun: true
+
+# don't test after training
+run_test: false
