@@ -198,6 +198,10 @@
 <li class="toctree-l1"><a class="reference internal" href="concept_interventions.html">Concept Interventions with CB-LBSTER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="training_from_scratch.html">Training a LBSTER Model from Scratch</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -463,22 +467,16 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lobster.model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LobsterPMLM</span><span class="p">,</span> <span class="n">LobsterCBMPMLM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/ncfrey/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -503,6 +501,57 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LobsterPMLM(
+  (_transform_fn): PmlmTokenizerTransform()
+  (model): LMBaseForMaskedLM(
+    (LMBase): LMBaseModel(
+      (embeddings): LMBaseEmbeddings(
+        (word_embeddings): Embedding(32, 408, padding_idx=1)
+        (dropout): Dropout(p=0.1, inplace=False)
+        (position_embeddings): Embedding(512, 408, padding_idx=1)
+      )
+      (encoder): LMBaseEncoder(
+        (layer): ModuleList(
+          (0-9): 10 x LMBaseLayer(
+            (attention): LMBaseAttention(
+              (self): LMBaseSelfAttention(
+                (query): Linear(in_features=408, out_features=408, bias=False)
+                (key): Linear(in_features=408, out_features=408, bias=False)
+                (value): Linear(in_features=408, out_features=408, bias=False)
+                (dropout): Dropout(p=0.0, inplace=False)
+                (rotary_embeddings): RotaryEmbedding()
+              )
+              (output): LMBaseSelfOutput(
+                (dense): Linear(in_features=408, out_features=408, bias=True)
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (LayerNorm): LayerNorm((408,), eps=1e-12, elementwise_affine=True)
+            )
+            (intermediate): LMBaseIntermediate(
+              (dense): Linear(in_features=408, out_features=2048, bias=False)
+              (intermediate_act_fn): GELUActivation()
+            )
+            (output): LMBaseOutput(
+              (dense): Linear(in_features=2048, out_features=408, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (LayerNorm): LayerNorm((408,), eps=1e-12, elementwise_affine=True)
+          )
+        )
+        (emb_layer_norm_after): LayerNorm((408,), eps=1e-12, elementwise_affine=True)
+      )
+    )
+    (lm_head): LMBaseLMHead(
+      (dense): Linear(in_features=408, out_features=408, bias=True)
+      (layer_norm): LayerNorm((408,), eps=1e-12, elementwise_affine=True)
+      (decoder): Linear(in_features=408, out_features=32, bias=True)
+    )
+  )
+)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -510,6 +559,11 @@ document.write(`
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model loaded on </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model loaded on cpu
 </pre></div>
 </div>
 </div>
@@ -556,6 +610,28 @@ document.write(`
     
     <span class="c1"># Convert list to numpy array</span>
     <span class="n">embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">16</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="n">input_ids</span><span class="o">=</span><span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="n">attention_mask</span><span class="o">=</span><span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;attention_mask&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="c1"># Extract the [CLS] token embedding</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">cls_embedding</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cls_embedding</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># Convert list to numpy array</span>
+
+<span class="nn">File ~/Documents/GitHub/lobster-docs/.venv/lib/python3.12/site-packages/transformers/utils/generic.py:435,</span> in <span class="ni">ModelOutput.__getitem__</span><span class="nt">(self, k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">433</span>     <span class="k">return</span> <span class="n">inner_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">434</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">435</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">()[</span><span class="n">k</span><span class="p">]</span>
+
+<span class="ne">TypeError</span>: tuple indices must be integers or slices, not tuple
 </pre></div>
 </div>
 </div>
